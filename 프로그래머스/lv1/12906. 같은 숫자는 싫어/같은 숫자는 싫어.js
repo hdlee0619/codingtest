@@ -1,13 +1,13 @@
 const solution = (arr) => {
-    let tempArray = [];
+    let Array = [];
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] !== arr[i + 1]) {
-            tempArray.push(arr[i]);
+            Array.push(arr[i]);
         }
     }
 
-    if (tempArray[tempArray.length - 2] === tempArray[tempArray.length - 1]) {
-        tempArray.pop();
+    if (Array[Array.length - 2] === Array[Array.length - 1]) {
+        Array.pop();
     }
-    return tempArray;
+    return Array;
 };

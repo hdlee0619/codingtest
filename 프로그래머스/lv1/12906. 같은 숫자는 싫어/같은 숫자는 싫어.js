@@ -1,7 +1,5 @@
 const solution = (arr) => {
-    let j = 1;
     let tempArray = [];
-    let array = [];
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] !== arr[i + 1]) {
             tempArray.push(arr[i]);

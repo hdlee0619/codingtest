@@ -1,65 +1,20 @@
 const solution = (lottos, win_nums) => {
-    let win = [...win_nums];
-    let lotto = [...lottos];
-    let zeroCount = 0;
-    let count = 0;
-    let total = 0;
     let answer = [];
-    lotto.forEach((a) => {
-        if (a === 0) {
-            zeroCount++;
-        }
-    });
-    for (let i = 0; i < lotto.length; i++) {
-        for (let j = 0; j < lotto.length; j++) {
-            if (lotto[i] === win[j]) {
-                count++;
-            }
-        }
-    }
 
-    total = zeroCount + count;
+    // win_nums와 일치하는 수 찾은 배열을 길이로 반환
+    const correct = lottos.filter((lotto) => win_nums.includes(lotto)).length;
 
-    switch (total) {
-        case 6:
-            answer.push(1);
-            break;
+    // 0과 일치하는 수 찾은 배열을 길이로 반환
+    const zeros = lottos.filter((lotto) => lotto === 0).length;
 
-        case 5:
-            answer.push(2);
-            break;
-        case 4:
-            answer.push(3);
-            break;
-        case 3:
-            answer.push(4);
-            break;
-        case 2:
-            answer.push(5);
-            break;
-        default:
-            answer.push(6);
-    }
+    console.log(correct, zeros);
 
-    switch (count) {
-        case 6:
-            answer.push(1);
-            break;
+    // 최저 순위는 7에서 맞힌 개수를 뺐을 때, 6보다 크면 맞힌 개수가 0이고
+    // 최대 순위는 0의 개수를 빼주었을 때, min이 1보다 작다면 최대 순위가 무조건 1위이고
+    // 아니라면 순위애서 0의 개수만큼 빼주어서 순위를 올려준다.
+    let min = 7 - correct >= 6 ? 6 : 7 - correct;
+    let max = min - zeros < 1 ? 1 : min - zeros;
 
-        case 5:
-            answer.push(2);
-            break;
-        case 4:
-            answer.push(3);
-            break;
-        case 3:
-            answer.push(4);
-            break;
-        case 2:
-            answer.push(5);
-            break;
-        default:
-            answer.push(6);
-    }
+    answer = [max, min];
     return answer;
 };
